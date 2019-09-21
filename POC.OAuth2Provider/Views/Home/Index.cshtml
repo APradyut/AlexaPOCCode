@@ -1,0 +1,49 @@
+﻿@model POC.OAuth2Provider.Models.UserVM
+
+@{
+    ViewData["Title"] = "Login";
+}
+@ViewBag.ResponseType
+<br />
+@ViewBag.ClientId
+<br />
+@ViewBag.RedirectUri
+<br />
+
+<h2>Login</h2>
+
+<h4>UserVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="response_type" value="@ViewBag.ResponseType" />
+            <input type="hidden" asp-for="client_id" value="@ViewBag.ClientId" />
+            <input type="hidden" asp-for="redirect_uri" value="@ViewBag.RedirectUri" />
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
